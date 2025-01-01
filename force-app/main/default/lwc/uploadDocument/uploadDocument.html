@@ -1,0 +1,76 @@
+<template>
+    <div class="document-container">
+        <div class="label-helptext-container" style="margin-bottom: 1.5rem;">
+            <abbr class="slds-required" title="required" lwc:if={required}>*</abbr>
+            <label class="label">
+                {label}
+            </label>
+            <lightning-helptext content={helptext} lwc:if={helptext} class="helptext"></lightning-helptext>
+        </div>
+
+        <lightning-input style="margin-top: -14px;" type="file" accept={allowedFormats} disabled={disabled}
+            onchange={uploadFileHandler} name={label} variant="label-hidden" label="label"
+            multiple="false"></lightning-input>
+
+        <div class="document-preview-delete-container">
+            <lightning-icon icon-name="utility:file" size="x-small" class="file-icon"></lightning-icon>
+
+            <p class="file-name">{label}</p>
+            <div class="document-icon-container">
+
+                <template lwc:if={allowPreview}>
+                    <lightning-icon icon-name="action:preview" size="xx-small" class="mouse-pointer preview-icon"
+                        name={label} lwc:if={contentVersionId} onclick={handlePreview}></lightning-icon>
+                </template>
+
+                <template lwc:if={allowDownload}>
+                    <lightning-icon icon-name="action:download" size="xx-small" class="mouse-pointer preview-icon"
+                        onclick={handleDownload} name={label} lwc:if={contentDocumentId}></lightning-icon>
+                </template>
+
+                <template lwc:if={allowDelete}>
+                    <lightning-icon icon-name="action:delete" size="xx-small" lwc:if={contentDocumentId} name={label}
+                        onclick={handleDelete} class="mouse-pointer preview-icon"></lightning-icon>
+                </template>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal For Document Preview -->
+    <template if:true={showModal}>
+        <div class="">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse slds-text-align_center"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium modal-container slds-text-align_center">
+                        <!-- Modal Content Comes Here -->
+                        <img src={documentPreviewURL} />
+                    </div>
+                    <footer class="slds-modal__footer"></footer>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+
+    <!-- Spinner Template -->
+    <template if:true={isSpinner}>
+        <div class="slds-is-relative">
+            <section class="slds-modal slds-fade-in-open">
+                <lightning-spinner alternative-text="loading..." variant="brand"></lightning-spinner>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="width: 60%; height:50%; margin:auto"></div>
+        </div>
+    </template>
+</template>

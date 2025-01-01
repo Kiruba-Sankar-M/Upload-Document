@@ -1,0 +1,43 @@
+.document-container {
+    padding: 1rem;
+    max-width: 350px;
+    border: 2px dashed gray;
+}
+
+.preview-icon {
+    margin-left: 10px;
+}
+
+.mouse-pointer {
+    cursor: pointer;
+}
+
+.label-helptext-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.label {
+    color: black;
+    font-weight: 600;
+}
+
+.helptext {
+    margin-top: -5px;
+}
+
+.document-preview-delete-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-left: 3px solid #2069f1;
+    background-color: #f0f8ff;
+    font-weight: 600;
+    /* max-width: 70%; */
+    padding-block: 0.7rem;
+    margin-top: 1rem;
+    gap: 10px;
+    padding-left: 0.5rem;
+    min-height: 54.5px;
+}
